@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -38,6 +39,7 @@ public class TodoListController {
     /**
      * HTTP GET
      */
+    @PreAuthorize("hasRole('javademoappusers')")
     @RequestMapping(value = "/api/todolist/{index}",
             method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> getTodoItem(@PathVariable("index") String index) {
@@ -51,6 +53,7 @@ public class TodoListController {
     /**
      * HTTP GET ALL
      */
+    @PreAuthorize("hasRole('javademoappusers')")
     @RequestMapping(value = "/api/todolist", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> getAllTodoItems() {
         try {
@@ -63,6 +66,7 @@ public class TodoListController {
     /**
      * HTTP POST NEW ONE
      */
+    @PreAuthorize("hasRole('javademoappusers')")
     @RequestMapping(value = "/api/todolist", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> addNewTodoItem(@RequestBody TodoItem item) {
         try {
@@ -77,6 +81,7 @@ public class TodoListController {
     /**
      * HTTP PUT UPDATE
      */
+    @PreAuthorize("hasRole('javademoappusers')")
     @RequestMapping(value = "/api/todolist", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateTodoItem(@RequestBody TodoItem item) {
         try {
@@ -91,6 +96,7 @@ public class TodoListController {
     /**
      * HTTP DELETE
      */
+    @PreAuthorize("hasRole('javademoappusers')")
     @RequestMapping(value = "/api/todolist/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> deleteTodoItem(@PathVariable("id") String id) {
         try {
